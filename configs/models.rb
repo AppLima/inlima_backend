@@ -1,14 +1,4 @@
 require_relative 'database'
-'''
-class Usuario < Sequel::Model(DB[:usuarios])
-end
-
-class UsuarioLogueado < Sequel::Model(DB[:vw_usuarios_logeados])
-end
-
-class Categoria < Sequel::Model(DB[:categorias]) 
-end
-'''
 
 # models/subject.rb
 class Subject < Sequel::Model(DB[:subjects])
