@@ -1,24 +1,68 @@
-@baseUrl = http://192.168.18.41:4567/
+@baseUrl = http://127.0.0.1:4567/
 
-#############################################
+#######3
+DELETE {{baseUrl}}user/77
 
-POST {{baseUrl}}usuario/validar 
-content-type: application/json
+######
+POST http://localhost:4567/iniciar_sesion
+Content-Type: application/json
 
 {
-  "usuario": "20210109",
-  "contrasenia": "123"
+  "email": "fernandojr@inlima.com",
+  "password": "dddd"
 }
 
-#############################################
-POST {{baseUrl}}usuario/cambiar-contrasenia
-Content-Type: application/x-www-form-urlencoded
+###########
+PUT http://localhost:4567/actualizar_cuenta
+Content-Type: application/json
+Cookie: myToken=<TU_TOKEN>
 
-correo=45954@aloe.ulima.edu.pe
+{
+  "password": "dddd",
+  "photo": "nueva_imagen_url"
+}
+################
 
-#############################################
-GET {{baseUrl}}seccion/alumno
-  ?alumno_d=1
+### Agregar una nueva queja
+POST http://localhost:4567/complaint
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
 
-#############################################
-GET {{baseUrl}}categoria/listar
+{
+  "description": "Descripción de la queja",
+  "location_description": "Descripción de la ubicación",
+  "latitude": -12.0464,
+  "longitude": -77.0428,
+  "district": 1,
+  "subject": 1,
+  "photos": ["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"]
+}
+
+### Obtener la ubicación de una queja
+GET http://localhost:4567/complaint/1/location
+Content-Type: application/json
+
+### Obtener el distrito de una queja
+GET http://localhost:4567/complaint/1/district
+Content-Type: application/json
+
+### Obtener quejas filtradas
+POST http://localhost:4567/complaints/filter
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "asuntos": ["Calles contaminadas", "Otros"]
+}
+
+### Obtener detalles de una queja específica
+GET http://localhost:4567/complaint/1/details
+Content-Type: application/json
+
+### Actualizar el estado de una queja
+PUT http://localhost:4567/complaint/1/status
+Content-Type: application/json
+
+{
+  "estado_id": 2
+}
