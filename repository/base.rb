@@ -31,6 +31,7 @@ class RepositoryBase
   
     # Actualizar un registro existente
     def update(id, attributes)
+      puts attributes
       record = @modelo.where(id: id).first
       return nil unless record
   
