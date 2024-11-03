@@ -1,4 +1,3 @@
-# controller/complaint.rb
 require 'json'
 require_relative '../helpers/auth_helper'
 require_relative '../DAO/complaint'
@@ -10,13 +9,9 @@ require_relative '../DAO/administrator'
 class ComplaintController
   include AuthHelper
 
-  # Agregar una nueva queja
-  #def agregar_queja(token, data)
-  def agregar_queja( data)
-    #usuario = verificar_token(token)
-    #puts usuario
-    ciudadano = true
-    #ciudadano = CitizenDAO.find_one_by_user_id(usuario[:id])
+  def agregar_queja(token, data)
+    usuario = verificar_token(token)
+    ciudadano = CitizenDAO.find_one_by_user_id(usuario[:id])
 
     if ciudadano
       queja = ComplaintDAO.create({
@@ -25,7 +20,7 @@ class ComplaintController
         latitude: data[:latitude],
         longitude: data[:longitude],
         status_id: 1,
-        citizen_id: 1,#ciudadano[:id],
+        citizen_id: ciudadano[:id],
         district_id: data[:district],
         subject_id: data[:subject]
       })

@@ -1,4 +1,5 @@
 @baseUrl = http://127.0.0.1:4567/
+@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMyNTkxMDAsImlkIjoyLCJlbWFpbCI6ImZlcm5hbmRvanJAaW5saW1hLmNvbSIsImZpcnN0X25hbWUiOiJGZXJuYW5kbyIsImxhc3RfbmFtZSI6Ikp1YXJleiBSb2phcyIsInBob3RvIjoibnVldmFfaW1hZ2VuX3VybCIsInJvbGUiOjJ9.XH-HhMj_nnuEMBrODJ9XLXPY_sRsmlnDjvOTGRa_LqM
 
 #######3
 
@@ -29,7 +30,7 @@ Cookie: myToken=<TU_TOKEN>
 
 ### Agregar una nueva queja
 POST http://localhost:4567/complaint
-Authorization: Bearer <TOKEN>
+Authorization: {{token}}
 Content-Type: application/json
 
 {
