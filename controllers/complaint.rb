@@ -55,8 +55,8 @@ class ComplaintController
   def encontrar_distrito(queja_id)
     queja = ComplaintDAO.find_one(queja_id)
     if queja
-      municipalidad = DistrictDAO.find_one(queja[:district_id])
-      { success: true, message: municipalidad[:nombre] }.to_json
+      district = DistrictDAO.find_one(queja[:district_id])
+      { success: true, message: district[:name] }.to_json
     else
       { success: false, message: 'Queja no encontrada' }.to_json
     end
@@ -94,7 +94,6 @@ class ComplaintController
     { success: false, message: "Error al actualizar el estado: #{e.message}" }.to_json
   end
 
-  # Obtener quejas de un usuario
   def obtener_quejas_usuario(token)
     usuario = verificar_token(token)
     ciudadano = CitizenDAO.find_one_by_user_id(usuario[:id])
@@ -105,46 +104,5 @@ class ComplaintController
     else
       { success: false, message: "Quejas no encontradas" }.to_json
     end
-  end
-
-  # Actualizar la puntuación de una queja
-  def actualizar_puntuacion(id, calificacion)
-    queja = ComplaintDAO.find_one(id)
-
-    if queja
-      queja.update(calificacion: calificacion)
-      { success: true, message: 'Puntuación actualizada con éxito', data: queja }.to_json
-    else
-      { success: false, message: "Queja no encontrada" }.to_json
-    end
-  end
-
-  # Actualizar la prioridad de una queja
-  def actualizar_prioridad(token, id, prioridad)
-    usuario = verificar_token(token)
-    if usuario[:rol_id] != 2
-      { success: false, message: 'Usuario no es administrador' }.to_json
-    else
-      queja = ComplaintDAO.update_prioridad(id, prioridad)
-      { success: true, message: 'Prioridad actualizada con éxito', data: queja }.to_json
-    end
-  end
-
-  private
-
-  # Construir condiciones de filtro para obtener_quejas_filtradas
-  def construir_condiciones_filtro(filtros, admin)
-    condiciones = {}
-    asuntos_predefinidos = ["Veredas rotas", "Calles contaminadas", "Poste de luces apagadas", "Construcción sin licencia", "Comercio ilegal", "Invasión no autorizada de lugares públicos", "Árboles obstruyen la circulación", "Vehículo abandonado", "Mascota perdida", "Inmueble abandonado", "Propiedad en mal estado"]
-
-    if filtros[:asuntos]&.include?('Otros')
-      condiciones[:asunto] = filtros[:asuntos].include?('Otros') ? { not_in: asuntos_predefinidos } : { in: filtros[:asuntos] }
-    end
-
-    if admin[:municipalidad_id]
-      condiciones[:municipalidad_id] = admin[:municipalidad_id]
-    end
-
-    condiciones
   end
 end
