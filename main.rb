@@ -38,14 +38,15 @@ end
 
 # Verificar si el usuario está autenticado a través de cookies (helper)
 
-#helpers do
- # def authenticate_request
-  #  token = request.cookies['myToken']
-   # halt 401, { success: false, message: 'Token no encontrado o inválido' }.to_json unless token
-    #begin
-     # JWT.decode(token, 'secret', true, algorithm: 'HS256').first
-    #rescue JWT::DecodeError
-     # halt 401, { success: false, message: 'Token no válido' }.to_json
-    #end
-  #end
-#end
+helpers do
+  def authenticate_request
+    token = request.env['HTTP_AUTHORIZATION']&.split(' ')&.last #|| request.cookies['myToken']
+    halt 401, { success: false, message: 'Token no encontrado o inválido' }.to_json unless token
+    
+    begin
+      JWT.decode(token, 'secret', true, algorithm: 'HS256').first
+    rescue JWT::DecodeError
+      halt 401, { success: false, message: 'Token no válido' }.to_json
+    end
+  end
+end

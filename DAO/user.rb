@@ -28,10 +28,8 @@ module UserDAO
     $user_repository.remove(id)
   end
 
-  def self.update_perfil(id, password, photo)
-    attributes = { password: password, photo: photo }
-    updated_user = $user_repository.update(id, attributes)
-    updated_user
+  def self.update_perfil(id, data)
+    updated_user = $user_repository.update(id, data)
   rescue Sequel::Error => e
     puts "Error al actualizar perfil: #{e.message}"
     nil
