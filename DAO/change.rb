@@ -3,7 +3,7 @@ require_relative '../configs/models'
 
 class ChangeRepository < RepositoryBase
   def initialize
-    super(Historial)
+    super(Change)
   end
 end
 

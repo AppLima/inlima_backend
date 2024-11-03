@@ -7,7 +7,8 @@ module AuthHelper
     begin
       payload = JWT.decode(token, SECRET_KEY, true, algorithm: 'HS256').first
       payload.transform_keys(&:to_sym)
-    rescue JWT::DecodeError
+    rescue JWT::DecodeError => e
+      #puts "Error de decodificación: #{e.message}"
       { error: true, status: 401, message: 'Token no válido' }
     end
   end

@@ -7,10 +7,10 @@ complaint_controller = ComplaintController.new
 # Ruta para agregar una queja
 post '/complaint' do
   content_type :json
-  #token = request.env['HTTP_AUTHORIZATION']
+  token = request.env['HTTP_AUTHORIZATION']
   data = JSON.parse(request.body.read, symbolize_names: true)
-  complaint_controller.agregar_queja(data)
-  #complaint_controller.agregar_queja(token, data)
+  #complaint_controller.agregar_queja(data)
+  complaint_controller.agregar_queja(token, data)
 end
 
 # Ruta para obtener la ubicación de una queja

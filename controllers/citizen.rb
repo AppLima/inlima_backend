@@ -3,7 +3,7 @@ require_relative '../DAO/user'
 require_relative '../DAO/citizen'
 require_relative '../DAO/complaint'
 
-class citizenController
+class CitizenController
     def register (data)
         ciudadano = CitizenDAO.find_one_by_email(data[:email]),
         if ciudadano

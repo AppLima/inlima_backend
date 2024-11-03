@@ -1,8 +1,7 @@
-require json
+require 'json'
 require_relative '../DAO/survey'
 
 class SurveyController
-    #def createSurvey(token, data)
     def createSurvey(data)
         begin
             survey = SurveyDAO.create({
