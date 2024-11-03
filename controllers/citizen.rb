@@ -4,7 +4,7 @@ require_relative '../DAO/citizen'
 require_relative '../DAO/complaint'
 
 class citizenController
-    def registrar (data)
+    def register (data)
         ciudadano = CitizenDAO.find_one_by_email(data[:email]),
         if ciudadano
             { success: false, message: "El usuario ya ha sido registrado" }.to_json
