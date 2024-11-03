@@ -8,7 +8,7 @@ class DistrictController
             { success: true, message: "Datos de municipalidades recuperados", data: districts }.to_json
         rescue => e
             puts "Error: #{e.message}"
-            { success: false, message: "Error al crear la queja" }.to_json
+            { success: false, message: "Error recuperar datos" }.to_json
         end
     end
 end
