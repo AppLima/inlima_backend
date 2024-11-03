@@ -1,6 +1,10 @@
 @baseUrl = http://127.0.0.1:4567/
 
 #######3
+
+GET http://localhost:4567/district
+
+######
 DELETE {{baseUrl}}user/77
 
 ######
@@ -37,7 +41,19 @@ Content-Type: application/json
   "subject": 1,
   "photos": ["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"]
 }
+### Agregar una nueva queja sin token
+POST http://localhost:4567/complaint
+Content-Type: application/json
 
+{
+  "description": "Descripción de la queja",
+  "location_description": "Descripción de la ubicación",
+  "latitude": -12.0464,
+  "longitude": -77.0428,
+  "district": 1,
+  "subject": 1,
+  "photos": ["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"]
+}
 ### Obtener la ubicación de una queja
 GET http://localhost:4567/complaint/1/location
 Content-Type: application/json
