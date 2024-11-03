@@ -7,9 +7,10 @@ complaint_controller = ComplaintController.new
 # Ruta para agregar una queja
 post '/complaint' do
   content_type :json
-  token = request.env['HTTP_AUTHORIZATION']
+  #token = request.env['HTTP_AUTHORIZATION']
   data = JSON.parse(request.body.read, symbolize_names: true)
-  complaint_controller.agregar_queja(token, data)
+  complaint_controller.agregar_queja(data)
+  #complaint_controller.agregar_queja(token, data)
 end
 
 # Ruta para obtener la ubicación de una queja
@@ -27,7 +28,7 @@ end
 # Ruta para obtener quejas filtradas
 post '/complaints/filter' do
   content_type :json
-  token = request.env['HTTP_AUTHORIZATION']
+  #token = request.env['HTTP_AUTHORIZATION']
   filtros = JSON.parse(request.body.read, symbolize_names: true)
   complaint_controller.obtener_quejas_filtradas(token, filtros)
 end
@@ -48,7 +49,7 @@ end
 # Ruta para obtener las quejas de un usuario
 get '/user/complaints' do
   content_type :json
-  token = request.env['HTTP_AUTHORIZATION']
+  #token = request.env['HTTP_AUTHORIZATION']
   complaint_controller.obtener_quejas_usuario(token)
 end
 
@@ -62,7 +63,7 @@ end
 # Ruta para actualizar la prioridad de una queja
 put '/complaint/:id/priority' do
   content_type :json
-  token = request.env['HTTP_AUTHORIZATION']
+  #token = request.env['HTTP_AUTHORIZATION']
   data = JSON.parse(request.body.read, symbolize_names: true)
   complaint_controller.actualizar_prioridad(token, params[:id].to_i, data[:prioridad])
 end

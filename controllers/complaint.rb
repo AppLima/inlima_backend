@@ -11,10 +11,12 @@ class ComplaintController
   include AuthHelper
 
   # Agregar una nueva queja
-  def agregar_queja(token, data)
-    usuario = verificar_token(token)
-    puts usuario
-    ciudadano = CitizenDAO.find_one_by_user_id(usuario[:id])
+  #def agregar_queja(token, data)
+  def agregar_queja( data)
+    #usuario = verificar_token(token)
+    #puts usuario
+    ciudadano = true
+    #ciudadano = CitizenDAO.find_one_by_user_id(usuario[:id])
 
     if ciudadano
       queja = ComplaintDAO.create({
@@ -23,7 +25,7 @@ class ComplaintController
         latitude: data[:latitude],
         longitude: data[:longitude],
         status_id: 1,
-        citizen_id: ciudadano[:id],
+        citizen_id: 1,#ciudadano[:id],
         district_id: data[:district],
         subject_id: data[:subject]
       })
