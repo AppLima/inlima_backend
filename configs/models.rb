@@ -4,6 +4,10 @@ require_relative 'database'
 class Subject < Sequel::Model(DB[:subjects])
     one_to_many :complaints
   end
+
+  # models/token.rb
+  class Token < Sequel::Model(DB[:tokens])
+  end
   
   # models/emergency.rb
   class Emergency < Sequel::Model(DB[:emergencies])

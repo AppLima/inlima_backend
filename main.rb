@@ -1,6 +1,7 @@
 require 'sinatra'
-require 'sequel' # Agregar para el manejo de cookies
-require 'jwt' # Agregar para el manejo de JWT
+require 'sequel'
+require 'jwt'
+require 'dotenv/load'
 
 # Configuración
 set :public_folder, File.dirname(__FILE__) + '/public'
@@ -35,12 +36,10 @@ get '/' do
 end
 
 # Middleware o Helpers para manejo de autenticación
-
 # Verificar si el usuario está autenticado a través de cookies (helper)
-
 helpers do
   def authenticate_request
-    token = request.env['HTTP_AUTHORIZATION']&.split(' ')&.last #|| request.cookies['myToken']
+    token = request.env['HTTP_AUTHORIZATION']&.split(' ')&.last
     halt 401, { success: false, message: 'Token no encontrado o inválido' }.to_json unless token
     
     begin
