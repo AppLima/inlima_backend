@@ -1,5 +1,5 @@
 @baseUrl = http://127.0.0.1:4567/
-@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMyNTkxMDAsImlkIjoyLCJlbWFpbCI6ImZlcm5hbmRvanJAaW5saW1hLmNvbSIsImZpcnN0X25hbWUiOiJGZXJuYW5kbyIsImxhc3RfbmFtZSI6Ikp1YXJleiBSb2phcyIsInBob3RvIjoibnVldmFfaW1hZ2VuX3VybCIsInJvbGUiOjJ9.XH-HhMj_nnuEMBrODJ9XLXPY_sRsmlnDjvOTGRa_LqM
+@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMzMzIzOTksImlkIjo3OSwiZW1haWwiOiJyZW56b3RpcHVsYTI3MDNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IkpvaG4iLCJsYXN0X25hbWUiOiJEb2UiLCJwaG90byI6IiIsInJvbGUiOjJ9.zhDs4m42n75eLvanjjtFgNP1WrBcinVhkt4aik5-a_w
 
 #######3
 
@@ -13,8 +13,8 @@ POST http://localhost:4567/iniciar_sesion
 Content-Type: application/json
 
 {
-  "email": "fernandojr@inlima.com",
-  "password": "dddd"
+  "email": "renzotipula2703@gmail.com",
+  "password": "securepassword123"
 }
 
 ###########

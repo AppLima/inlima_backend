@@ -1,0 +1,12 @@
+@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMzMzIzOTksImlkIjo3OSwiZW1haWwiOiJyZW56b3RpcHVsYTI3MDNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IkpvaG4iLCJsYXN0X25hbWUiOiJEb2UiLCJwaG90byI6IiIsInJvbGUiOjJ9.zhDs4m42n75eLvanjjtFgNP1WrBcinVhkt4aik5-a_w
+
+### Prueba para record_change en ChangeController
+POST http://127.0.0.1:4567/record_change
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "complaint_id": ,
+    "status_id": 
+}
+#########

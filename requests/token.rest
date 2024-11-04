@@ -1,0 +1,16 @@
+### Prueba para crear un token de verificación
+POST http://localhost:4567/token/create
+Content-Type: application/json
+
+{
+    "email": "usuario@example.com"
+}
+
+### Prueba para verificar un token de verificación válido
+POST http://localhost:4567/token/verify
+Content-Type: application/json
+
+{
+    "email": "usuario@example.com",
+    "code": "123456" 
+}

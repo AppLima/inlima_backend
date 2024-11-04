@@ -1,0 +1,2 @@
+GET http://localhost:4567/status
+Content-Type: application/json

@@ -1,0 +1,21 @@
+@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMzMzIzOTksImlkIjo3OSwiZW1haWwiOiJyZW56b3RpcHVsYTI3MDNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IkpvaG4iLCJsYXN0X25hbWUiOiJEb2UiLCJwaG90byI6IiIsInJvbGUiOjJ9.zhDs4m42n75eLvanjjtFgNP1WrBcinVhkt4aik5-a_w
+
+### Prueba para registrar una respuesta con opción 1
+POST http://127.0.0.1:4567/record_response
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "option": 1,
+    "survey_id": 1
+}
+
+### Prueba para registrar una respuesta con opción 0
+POST http://127.0.0.1:4567/record_response
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "option": 0,
+    "survey_id": 2
+}

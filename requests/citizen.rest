@@ -1,0 +1,14 @@
+### Prueba de registro de ciudadano
+POST http://localhost:4567/register
+Content-Type: application/json
+
+{
+    "email": "ssss@gmail.com",
+    "password": "securepassword123",
+    "first_name": "John",
+    "last_name": "Doe",
+    "gender": 1,
+    "dni": "12345678",
+    "phone_number": "987654321",
+    "district": 3
+}

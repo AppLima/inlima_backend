@@ -1,0 +1,42 @@
+@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMzMzIzOTksImlkIjo3OSwiZW1haWwiOiJyZW56b3RpcHVsYTI3MDNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IkpvaG4iLCJsYXN0X25hbWUiOiJEb2UiLCJwaG90byI6IiIsInJvbGUiOjJ9.zhDs4m42n75eLvanjjtFgNP1WrBcinVhkt4aik5-a_w
+
+### Prueba para agregar una queja
+POST http://127.0.0.1:4567/complaint
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "description": "Descripción de prueba de la queja",
+    "location_description": "Dirección de prueba",
+    "latitude": -12.04318,
+    "longitude": -77.02824,
+    "district": 1,
+    "subject": 2,
+    "photos": ["http://example.com/photo1.jpg", "http://example.com/photo2.jpg"]
+}
+
+### Prueba para encontrar la ubicación de una queja
+GET http://127.0.0.1:4567/complaint/1/location
+Content-Type: application/json
+
+### Prueba para encontrar el distrito de una queja
+GET http://127.0.0.1:4567/complaint/1/district
+Content-Type: application/json
+
+### Prueba para obtener quejas filtradas
+POST http://127.0.0.1:4567/complaints/filter
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+
+}
+
+### Prueba para obtener detalles de una queja específica
+GET http://127.0.0.1:4567/complaint/1/details
+Content-Type: application/json
+
+### Prueba para obtener quejas de un usuario
+GET http://127.0.0.1:4567/user/complaints
+Content-Type: application/json
+Authorization: {{token}}
