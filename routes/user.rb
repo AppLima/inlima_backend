@@ -33,12 +33,6 @@ post '/encontrar_usuario' do
   user_controller.encontrar_usuario(data['id_ciudadano'])
 end
 
-
-#get '/find_user_token' do
-#  token = request.cookies['myToken']
-#  user_controller.find_user_token(token)
-#end
-
 post '/find_user_by_email' do
   data = JSON.parse(request.body.read)
   user_controller.find_user_by_email(data['email'])

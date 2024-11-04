@@ -3,9 +3,10 @@ require 'jwt'
 require 'json'
 require_relative '../DAO/user'
 require_relative '../DAO/citizen'
+require 'dotenv/load'
 
 class UserController
-  SECRET_KEY = 'secret'
+  SECRET_KEY = ENV['SECRET_KEY']
 
   def iniciar_sesion(email, password, response)
     usuario = UserDAO.find_one_by_email(email)
@@ -17,12 +18,6 @@ class UserController
     end
   end
 
-  #def cerrar_sesion(response)
-   # eliminar_cookie(response)
-    #{ message: 'Sesión cerrada correctamente' }.to_json
-  #end
-
-  # Actualizar cuenta
   def actualizar_cuenta(token, data)
     usuario = verificar_token(token)
     if usuario
@@ -37,7 +32,6 @@ class UserController
     end
   end
 
-  # Obtener rol de usuario
   def obtener_rol(token)
     usuario = verificar_token(token)
     if usuario
@@ -47,7 +41,6 @@ class UserController
     end
   end
 
-  # Encontrar usuario por id_ciudadano
   def encontrar_usuario(id_ciudadano)
     ciudadano = CitizenDAO.find_one(id_ciudadano)
     if ciudadano
@@ -58,7 +51,6 @@ class UserController
     end
   end
 
-  # Encontrar usuario por token
   def find_user_token(token)
     usuario = verificar_token(token)
     if usuario
@@ -69,7 +61,6 @@ class UserController
     end
   end
 
-  # Encontrar usuario por email
   def find_user_by_email(email)
     usuario = UserDAO.find_one_by_email(email)
     if usuario
@@ -79,7 +70,6 @@ class UserController
     end
   end
 
-  # Resetear contraseña
   def reset_password(email, new_password)
     usuario = UserDAO.find_one_by_email(email)
     if usuario
@@ -92,7 +82,6 @@ class UserController
 
   private
 
-  # Generar token JWT
   def generar_token(usuario)
     puts usuario
     payload = {
