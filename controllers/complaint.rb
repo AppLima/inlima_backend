@@ -9,7 +9,7 @@ require_relative '../DAO/administrator'
 class ComplaintController
   include AuthHelper
 
-  def agregar_queja(token, data)
+  def add_complaint(token, data)
     usuario = verificar_token(token)
     ciudadano = CitizenDAO.find_one_by_user_id(usuario[:id])
 
@@ -41,7 +41,6 @@ class ComplaintController
     end
   end
 
-  # Encontrar la ubicación de una queja
   def encontrar_ubicacion(queja_id)
     queja = ComplaintDAO.find_one(queja_id)
     if queja
@@ -51,7 +50,6 @@ class ComplaintController
     end
   end
 
-  # Obtener distrito de una queja
   def encontrar_distrito(queja_id)
     queja = ComplaintDAO.find_one(queja_id)
     if queja
@@ -62,7 +60,6 @@ class ComplaintController
     end
   end
 
-  # Obtener quejas filtradas
   def obtener_quejas_filtradas(token, filtros)
     usuario = verificar_token(token)
     admin = AdministratorDAO.find_one_by_user_id(usuario[:id])
@@ -75,8 +72,7 @@ class ComplaintController
       { success: false, message: 'Acceso denegado' }.to_json
     end
   end
-
-  # Obtener detalles de una queja
+  
   def obtener_queja_con_detalles(id)
     queja = ComplaintDAO.find_one_by_citizen_id(id)
     if queja
@@ -84,14 +80,6 @@ class ComplaintController
     else
       { success: false, message: "Queja no encontrada" }.to_json
     end
-  end
-
-  # Actualizar estado de una queja
-  def actualizar_estado(id, estado_id)
-    queja = ComplaintDAO.update_estado(id, estado_id)
-    { success: true, message: 'Estado actualizado con éxito', data: queja }.to_json
-  rescue StandardError => e
-    { success: false, message: "Error al actualizar el estado: #{e.message}" }.to_json
   end
 
   def obtener_quejas_usuario(token)
