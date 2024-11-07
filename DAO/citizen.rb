@@ -34,6 +34,10 @@ module CitizenDAO
     $citizen_repository.update(data[:id], data)
   end
 
+  def self.find_one_by_dni(dni)
+    Citizen.where(dni: dni).first
+  end
+
   def self.remove(id)
     $citizen_repository.remove(id)
   end
