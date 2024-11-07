@@ -7,7 +7,7 @@ require 'dotenv/load'
 
 class UserController
   SECRET_KEY = ENV['SECRET_KEY']
-
+  @@revoked_tokens = []
   def iniciar_sesion(email, password, response)
     usuario = UserDAO.find_one_by_email(email)
     if usuario && usuario[:password] == password
@@ -18,6 +18,11 @@ class UserController
     end
   end
 
+  def cerrar_sesion(token)
+    @@revoked_tokens << token
+    { success: true, message: 'Sesión cerrada exitosamente' }.to_json
+  end
+  
   def actualizar_cuenta(token, data)
     usuario = verificar_token(token)
     if usuario
@@ -91,7 +96,8 @@ class UserController
       first_name: usuario[:first_name],
       last_name: usuario[:last_name],
       photo: usuario[:photo],
-      role: usuario[:role_id]
+      role: usuario[:role_id],
+      gender_id: usuario[:gender_id] 
     }
     JWT.encode(payload, SECRET_KEY, 'HS256')
   end
