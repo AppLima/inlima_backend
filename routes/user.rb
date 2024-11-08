@@ -42,3 +42,9 @@ post '/reset_password' do
   data = JSON.parse(request.body.read)
   user_controller.reset_password(data['email'], data['password'])
 end
+
+put '/set_terms_conditions' do
+  data = JSON.parse(request.body.read, symbolize_names: true)
+  token = request.env['HTTP_AUTHORIZATION']
+  user_controller.terms_conditions(token, data)
+end

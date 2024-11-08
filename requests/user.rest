@@ -59,3 +59,12 @@ Content-Type: application/json
   "email": "usuario@example.com",
   "password": "NuevaContraseñaSegura123"
 }
+
+####
+PUT http://localhost:4567/set_terms_conditions
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "terms_conditions": 1
+}
