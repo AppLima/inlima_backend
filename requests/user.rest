@@ -1,5 +1,5 @@
 @baseUrl = http://127.0.0.1:4567/
-@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMzMzIzOTksImlkIjo3OSwiZW1haWwiOiJyZW56b3RpcHVsYTI3MDNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IkpvaG4iLCJsYXN0X25hbWUiOiJEb2UiLCJwaG90byI6IiIsInJvbGUiOjJ9.zhDs4m42n75eLvanjjtFgNP1WrBcinVhkt4aik5-a_w
+@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM2MzU4MTIsImlkIjo3NywiZW1haWwiOiJnYWJyaWVsdGdAaW5saW1hLmNvbSIsImZpcnN0X25hbWUiOiJHYWJyaWVsIiwibGFzdF9uYW1lIjoiVG9ycmVzIEdhcmNpYSIsInBob3RvIjoiIiwicm9sZSI6Mn0.bNTKUM5vZQSN65sUqmeZ-hkRH0EJxAecO2Hc94cyR_4
 
 #######3
 
@@ -13,8 +13,8 @@ POST http://localhost:4567/iniciar_sesion
 Content-Type: application/json
 
 {
-  "email": "20201426@aloe.ulima.edu.pe",
-  "password": "securepassword123"
+  "email": "gabrieltg@inlima.com",
+  "password": "password"
 }
 
 ###########
@@ -23,7 +23,7 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "password": "SSSS",
+  "password": "12",
   "photo": "nueva_imagen_urlss"
 }
 ################

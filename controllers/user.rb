@@ -23,6 +23,17 @@ class UserController
   def actualizar_cuenta(token, data)
     usuario = verificar_token(token)
     if usuario
+      # Verificar si hay una nueva contraseña y si es válida
+      if data[:password]
+        puts "Recibida contraseña: #{data[:password]}"  # Depuración
+        unless valid_password?(data[:password])
+          puts "Contraseña inválida detectada: #{data[:password]}" # Depuración adicional
+          return { success: false, message: 'La contraseña no cumple con los requisitos de seguridad' }.to_json
+        end
+        puts "Contraseña válida: #{data[:password]}"  # Depuración adicional si pasa la validación
+      end
+  
+      # Si la contraseña es válida (o no hay una nueva), se continúa con la actualización
       updated_user = UserDAO.update_perfil(usuario[:id], data)
       if updated_user
         { success: true, message: 'Datos actualizados con éxito' }.to_json
@@ -33,6 +44,21 @@ class UserController
       { success: false, message: 'Usuario no encontrado' }.to_json
     end
   end
+  
+  def valid_password?(password)
+    # Revisar la contraseña con mensajes de depuración
+    min_length = password.length >= 8
+    has_uppercase = password =~ /[A-Z]/
+    has_lowercase = password =~ /[a-z]/
+    has_digit = password =~ /\d/
+    has_special_char = password =~ /[!@#$%^&*()_+{}\[\]:;.,<>?\|\\~\-]/
+  
+    puts "Longitud mínima: #{min_length}, Mayúscula: #{has_uppercase}, Minúscula: #{has_lowercase}, Dígito: #{has_digit}, Carácter especial: #{has_special_char}"  # Depuración
+  
+    # Asegurarse de que todas las condiciones se cumplan
+    min_length && has_uppercase && has_lowercase && has_digit && has_special_char
+  end
+  
 
   def obtener_rol(token)
     usuario = verificar_token(token)
@@ -73,6 +99,11 @@ class UserController
   end
 
   def reset_password(email, new_password)
+    # Validación de la nueva contraseña
+    if !valid_password?(new_password)
+      return { success: false, message: 'La contraseña no cumple con los requisitos de seguridad' }.to_json
+    end
+
     usuario = UserDAO.find_one_by_email(email)
     if usuario
       UserDAO.reset_password(usuario[:id], new_password)
@@ -85,7 +116,6 @@ class UserController
   private
 
   def generar_token(usuario)
-    puts usuario
     payload = {
       exp: Time.now.to_i + 60 * 60 * 24 * 30,
       id: usuario[:id],
