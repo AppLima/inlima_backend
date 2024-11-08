@@ -30,7 +30,7 @@ end
 
 post '/encontrar_usuario' do
   data = JSON.parse(request.body.read)
-  user_controller.encontrar_usuario(data['id_ciudadano'])
+  user_controller.encontrar_usuario(data['citizen_id'])
 end
 
 post '/find_user_by_email' do

@@ -31,3 +31,31 @@ Content-Type: application/json
 }
 
 #######
+
+GET http://localhost:4567/obtener_rol
+Authorization: {{token}}
+
+######
+POST http://localhost:4567/encontrar_usuario
+Content-Type: application/json
+
+{
+  "citizen_id": 77
+}
+
+#########
+POST http://localhost:4567/find_user_by_email
+Content-Type: application/json
+
+{
+  "email": "renzotipula2703@gmail.com"
+}
+
+###########
+POST http://localhost:4567/reset_password
+Content-Type: application/json
+
+{
+  "email": "usuario@example.com",
+  "password": "NuevaContraseñaSegura123"
+}

@@ -56,8 +56,22 @@ class UserController
   def encontrar_usuario(id_ciudadano)
     ciudadano = CitizenDAO.find_one(id_ciudadano)
     if ciudadano
-      usuario = UserDAO.find_one(ciudadano[:usuario_id])
+      usuario = UserDAO.find_one(ciudadano[:user_id])
       { success: true, usuario: usuario }.to_json
+    else
+      { success: false, message: 'Usuario no encontrado' }.to_json
+    end
+  end
+
+  def obtener_rol(token)
+    usuario = verificar_token(token)
+    if usuario
+      aux = UserDAO.find_one(usuario[:id])
+      if aux
+        { success: true, role_id: aux[:role_id] }.to_json
+      else
+        { success: false, message: 'Usuario no encontrado' }.to_json
+      end
     else
       { success: false, message: 'Usuario no encontrado' }.to_json
     end
@@ -96,8 +110,6 @@ class UserController
       { success: false, message: 'Usuario no encontrado' }.to_json
     end
   end
-
-  private
 
   def generar_token(usuario)
     payload = {
