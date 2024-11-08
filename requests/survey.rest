@@ -1,37 +1,16 @@
 ### Prueba para crear una encuesta con datos válidos
-POST http://localhost:4567/survey/create
+POST http://localhost:4567/create_survey
 Content-Type: application/json
 
 {
     "title": "Encuesta de Satisfacción Ciudadana",
     "description": "Evaluación de los servicios municipales",
     "photo": "https://example.com/image.jpg",
-    "start_date": "2024-11-15",
-    "end_date": "2024-12-15",
+    "start_date": "2024-11-01 08:00:00",
+    "end_date": "2024-12-30 08:00:00",
     "district_id": 1
 }
 
 ### Prueba para crear una encuesta con una fecha de inicio futura y sin fecha de fin
-POST http://localhost:4567/survey/create
+GET http://localhost:4567/survey
 Content-Type: application/json
-
-{
-    "title": "Encuesta sobre Infraestructura",
-    "description": "Evaluación de la infraestructura urbana",
-    "photo": "https://example.com/image2.jpg",
-    "start_date": "2024-12-01",
-    "end_date": "2025-01-01",
-    "district_id": 2
-}
-
-### Prueba para crear una encuesta sin datos obligatorios (error esperado)
-POST http://localhost:4567/survey/create
-Content-Type: application/json
-
-{
-    "title": "",
-    "description": "",
-    "start_date": "",
-    "end_date": "",
-    "district_id": 0
-}

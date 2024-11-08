@@ -9,7 +9,7 @@ class SurveyController
                 description: data[:description],
                 photo: data[:photo],
                 total_results: 0,
-                postives: 0,
+                positives: 0,
                 negatives: 0,
                 start_date: data[:start_date],
                 end_date: data[:end_date],
@@ -20,6 +20,15 @@ class SurveyController
         rescue => e
             puts "Error: #{e.message}"
             { success: false, message: "Error al crear la encuesta" }.to_json
+        end
+    end
+
+    def getsurveys()
+        survey = SurveyDAO.find_all()
+        if survey
+          { success: true, data: survey }.to_json
+        else
+          { success: false, message: "Queja no encontrada" }.to_json
         end
     end
 end
