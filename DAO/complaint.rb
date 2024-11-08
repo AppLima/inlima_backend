@@ -14,10 +14,12 @@ module ComplaintDAO
     $complaint_repository.find_all
   end
 
-  def self.find_all_by_ciudadano_id(ciudadano_id)
-    Complaint.where(ciudadano_id: ciudadano_id).eager(:status, citizen: [:user], district: [:name]).all
+  def self.find_all_by_citizen_id(ciudadano_id)
+    Complaint.where(citizen_id: ciudadano_id)
+             .eager(:status, { citizen: :user }, :district)
+             .all
   rescue Sequel::Error => e
-    puts "Error al buscar quejas por ciudadano_id: #{e.message}"
+    puts "Error al buscar quejas por citizen_id: #{e.message}"
     nil
   end
 
@@ -37,10 +39,20 @@ module ComplaintDAO
     $complaint_repository.remove(id)
   end
 
-  def self.find_filtered(where_conditions)
-    Complaint.where(where_conditions).eager(:status, :citizen, :district).all
+  def self.find_filtered(subject_ids, district_ids)
+    query = Complaint
+    if subject_ids.is_a?(Array) && !subject_ids.empty?
+      query = query.where(subject_id: subject_ids)
+    end
+    if district_ids.is_a?(Array) && !district_ids.empty?
+      query = query.where(district_id: district_ids)
+    end
+    resultados = query.eager(:status, { citizen: :user }, :district).all
+  
+    #puts "Resultados encontrados: #{resultados.inspect}"
+    resultados
   rescue Sequel::Error => e
-    puts "Error al buscar quejas con filtros: #{e.message}"
+    puts "Error al buscar quejas: #{e.message}"
     nil
   end
 

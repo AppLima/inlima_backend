@@ -1,4 +1,6 @@
-@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMzMzIzOTksImlkIjo3OSwiZW1haWwiOiJyZW56b3RpcHVsYTI3MDNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IkpvaG4iLCJsYXN0X25hbWUiOiJEb2UiLCJwaG90byI6IiIsInJvbGUiOjJ9.zhDs4m42n75eLvanjjtFgNP1WrBcinVhkt4aik5-a_w
+#@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMzMzIzOTksImlkIjo3OSwiZW1haWwiOiJyZW56b3RpcHVsYTI3MDNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IkpvaG4iLCJsYXN0X25hbWUiOiJEb2UiLCJwaG90byI6IiIsInJvbGUiOjJ9.zhDs4m42n75eLvanjjtFgNP1WrBcinVhkt4aik5-a_w
+
+@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM2NDQwOTIsImlkIjoxLCJlbWFpbCI6ImFkbWluQGlubGltYS5jb20iLCJmaXJzdF9uYW1lIjoiQWRtaW4iLCJsYXN0X25hbWUiOiJGb3JhbGwiLCJwaG90byI6IiIsInJvbGUiOjF9.WN5TbA1zeDisiMX3Q2SJan-F7Ab4Q6C_UJ-m3aFqzmY
 
 ### Prueba para record_change en ChangeController
 POST http://127.0.0.1:4567/record_change
@@ -10,4 +12,3 @@ Content-Type: application/json
     "complaint_id": 6,
     "status_id": 2
 }
-#########

@@ -1,4 +1,6 @@
 @token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMzMzIzOTksImlkIjo3OSwiZW1haWwiOiJyZW56b3RpcHVsYTI3MDNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IkpvaG4iLCJsYXN0X25hbWUiOiJEb2UiLCJwaG90byI6IiIsInJvbGUiOjJ9.zhDs4m42n75eLvanjjtFgNP1WrBcinVhkt4aik5-a_w
+@tokenadmin = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM2NDQwOTIsImlkIjoxLCJlbWFpbCI6ImFkbWluQGlubGltYS5jb20iLCJmaXJzdF9uYW1lIjoiQWRtaW4iLCJsYXN0X25hbWUiOiJGb3JhbGwiLCJwaG90byI6IiIsInJvbGUiOjF9.WN5TbA1zeDisiMX3Q2SJan-F7Ab4Q6C_UJ-m3aFqzmY
+
 
 ### Prueba para agregar una queja
 POST http://127.0.0.1:4567/complaint
@@ -24,13 +26,15 @@ GET http://127.0.0.1:4567/complaint/1/district
 Content-Type: application/json
 
 ### Prueba para obtener quejas filtradas
-POST http://127.0.0.1:4567/complaints/filter
+POST http://localhost:4567/complaints/filtered
+Authorization: {{tokenadmin}}
 Content-Type: application/json
-Authorization: {{token}}
 
 {
-
+    "subject_ids": [1, 2],
+    "districtc_ids": [1]
 }
+
 
 ### Prueba para obtener detalles de una queja específica
 GET http://127.0.0.1:4567/complaint/1/details

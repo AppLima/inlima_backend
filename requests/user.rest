@@ -1,19 +1,22 @@
 @baseUrl = http://127.0.0.1:4567/
 @token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM2MzU4MTIsImlkIjo3NywiZW1haWwiOiJnYWJyaWVsdGdAaW5saW1hLmNvbSIsImZpcnN0X25hbWUiOiJHYWJyaWVsIiwibGFzdF9uYW1lIjoiVG9ycmVzIEdhcmNpYSIsInBob3RvIjoiIiwicm9sZSI6Mn0.bNTKUM5vZQSN65sUqmeZ-hkRH0EJxAecO2Hc94cyR_4
 
-#######3
-
-GET http://localhost:4567/district
-
-######
-DELETE {{baseUrl}}user/77
-
 ######
 POST http://localhost:4567/iniciar_sesion
 Content-Type: application/json
 
 {
   "email": "gabrieltg@inlima.com",
+  "password": "password"
+}
+
+###########
+######
+POST http://localhost:4567/iniciar_sesion
+Content-Type: application/json
+
+{
+  "email": "admin@inlima.com",
   "password": "password"
 }
 
@@ -26,60 +29,5 @@ Content-Type: application/json
   "password": "*Renzo??SEFSASAS222A",
   "photo": "nueva_imagen_urlss"
 }
-################
 
-### Agregar una nueva queja
-POST http://localhost:4567/complaint
-Authorization: {{token}}
-Content-Type: application/json
-
-{
-  "description": "Descripción de la queja",
-  "location_description": "Descripción de la ubicación",
-  "latitude": -12.0464,
-  "longitude": -77.0428,
-  "district": 1,
-  "subject": 1,
-  "photos": ["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"]
-}
-### Agregar una nueva queja sin token
-POST http://localhost:4567/complaint
-Content-Type: application/json
-
-{
-  "description": "Descripción de la queja",
-  "location_description": "Descripción de la ubicación",
-  "latitude": -12.0464,
-  "longitude": -77.0428,
-  "district": 1,
-  "subject": 1,
-  "photos": ["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"]
-}
-### Obtener la ubicación de una queja
-GET http://localhost:4567/complaint/1/location
-Content-Type: application/json
-
-### Obtener el distrito de una queja
-GET http://localhost:4567/complaint/1/district
-Content-Type: application/json
-
-### Obtener quejas filtradas
-POST http://localhost:4567/complaints/filter
-Authorization: Bearer <TOKEN>
-Content-Type: application/json
-
-{
-  "asuntos": ["Calles contaminadas", "Otros"]
-}
-
-### Obtener detalles de una queja específica
-GET http://localhost:4567/complaint/1/details
-Content-Type: application/json
-
-### Actualizar el estado de una queja
-PUT http://localhost:4567/complaint/1/status
-Content-Type: application/json
-
-{
-  "estado_id": 2
-}
+#######

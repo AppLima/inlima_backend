@@ -111,4 +111,20 @@ class UserController
     }
     JWT.encode(payload, SECRET_KEY, 'HS256')
   end
+
+  def terms_conditions(option)
+    usuario = verificar_token(token)
+    if usuario
+      if option
+        aux = UserDAO.update_perfil(usuario[:id], terms_conditions: 1)
+        if aux
+          { success: true, message: 'Terminos actualizados' }.to_json
+        else
+          { success: false, message: 'Error al actualizar' }.to_json
+        end
+      end
+    else
+      { success: false, message: 'Usuario no encontrado' }.to_json
+    end
+  end
 end

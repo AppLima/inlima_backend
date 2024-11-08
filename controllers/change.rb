@@ -3,6 +3,7 @@ require_relative '../DAO/administrator'
 require_relative '../DAO/change'
 require_relative '../DAO/complaint'
 require_relative '../DAO/user'
+require_relative '../DAO/citizen'
 require_relative '../DAO/subject'
 require_relative '../DAO/status'
 require_relative '../helpers/auth_helper'
@@ -13,7 +14,7 @@ class ChangeController
 
   def record_change(token, data)
     begin
-      usuario = verificar_token(token)
+      admin = verificar_token(token)
     rescue => e
       puts "Error al verificar el token: #{e.message}"
       return { success: false, message: "Error al verificar el token" }.to_json
@@ -21,11 +22,11 @@ class ChangeController
 
     begin
       change = ChangeDAO.create({
-        administrator_id: usuario[:id],
+        administrator_id: admin[:id],
         complaint_id: data[:complaint_id],
         status_id: data[:status_id]
       })
-      complaint = ComplaintDAO.update_estado(data[:complaint_id], status_id: data[:status_id])
+      ComplaintDAO.update_estado(data[:complaint_id], status_id: data[:status_id])
     rescue => e
       puts "Error al crear el cambio: #{e.message}"
       return { success: false, message: "Error al crear el cambio" }.to_json
@@ -33,6 +34,8 @@ class ChangeController
 
     begin
       complaint = ComplaintDAO.find_one(data[:complaint_id])
+      ciudadano = CitizenDAO.find_one(complaint[:citizen_id])
+      usuario = UserDAO.find_one(ciudadano[:user_id])
       subject = SubjectDAO.find_one(complaint[:subject_id])
       status = StatusDAO.find_one(data[:status_id])
     rescue => e
@@ -41,6 +44,7 @@ class ChangeController
     end
 
     begin
+       
       Notifier.notify_status_change(usuario[:email], status[:name], 'ILM0002', usuario[:first_name], subject[:name], change[:dateofcreation])
       { success: true, message: "Cambio registrado", data: change }.to_json
     rescue => e

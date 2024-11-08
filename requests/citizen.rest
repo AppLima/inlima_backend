@@ -6,7 +6,7 @@ Content-Type: application/json
     "email": "20200333@aloe.ulima.edu.pe",
     "password": "securepassword123",
     "first_name": "Cesar",
-    "last_name": "Putito",
+    "last_name": "?Contraseña1234",
     "gender": 1,
     "dni": "12345678",
     "phone_number": "987654321",

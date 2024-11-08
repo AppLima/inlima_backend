@@ -62,19 +62,27 @@ class ComplaintController
 
   def obtener_quejas_filtradas(token, filtros)
     usuario = verificar_token(token)
+    return { success: false, message: 'Token inválido' }.to_json unless usuario
+  
     admin = AdministratorDAO.find_one_by_user_id(usuario[:id])
+    return { success: false, message: 'Acceso denegado' }.to_json unless admin
 
-    if admin
-      condiciones = construir_condiciones_filtro(filtros, admin)
-      quejas = ComplaintDAO.find_filtered(condiciones)
+    subject_ids = filtros[:subject_ids]
+    district_ids = filtros[:district_ids]
+  
+    #puts "Filtros recibidos: subject_ids=#{subject_ids.inspect}, district_ids=#{district_ids.inspect}"
+  
+    quejas = ComplaintDAO.find_filtered(subject_ids, district_ids)
+  
+    if quejas && !quejas.empty?
       { success: true, data: quejas }.to_json
     else
-      { success: false, message: 'Acceso denegado' }.to_json
+      { success: false, message: 'No hay quejas' }.to_json
     end
   end
   
   def obtener_queja_con_detalles(id)
-    queja = ComplaintDAO.find_one_by_citizen_id(id)
+    queja = ComplaintDAO.find_one(id)
     if queja
       { success: true, data: queja }.to_json
     else
