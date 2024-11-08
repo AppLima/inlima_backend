@@ -51,12 +51,8 @@ module ComplaintDAO
     nil
   end
 
-  def self.update_estado(id, estado_id)
-    complaint = $complaint_repository.find_one(id)
-    return nil unless complaint
-
-    complaint.update(status_id: estado_id)
-    complaint
+  def self.update_estado(id, data)
+    complaint = $complaint_repository.update(id, data)
   rescue Sequel::Error => e
     puts "Error al actualizar el estado de la queja: #{e.message}"
     nil

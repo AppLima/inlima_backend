@@ -25,6 +25,7 @@ class ChangeController
         complaint_id: data[:complaint_id],
         status_id: data[:status_id]
       })
+      complaint = ComplaintDAO.update_estado(data[:complaint_id], status_id: data[:status_id])
     rescue => e
       puts "Error al crear el cambio: #{e.message}"
       return { success: false, message: "Error al crear el cambio" }.to_json
