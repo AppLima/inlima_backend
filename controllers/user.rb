@@ -1,13 +1,15 @@
 # controller/user.rb
 require 'jwt'
 require 'json'
+require_relative '../helpers/auth_helper'
 require_relative '../DAO/user'
 require_relative '../DAO/citizen'
 require 'dotenv/load'
 
 class UserController
+  include AuthHelper
   SECRET_KEY = ENV['SECRET_KEY']
-  @@revoked_tokens = []
+
   def iniciar_sesion(email, password, response)
     usuario = UserDAO.find_one_by_email(email)
     if usuario && usuario[:password] == password
@@ -18,11 +20,6 @@ class UserController
     end
   end
 
-  def cerrar_sesion(token)
-    @@revoked_tokens << token
-    { success: true, message: 'Sesión cerrada exitosamente' }.to_json
-  end
-  
   def actualizar_cuenta(token, data)
     usuario = verificar_token(token)
     if usuario
@@ -30,10 +27,10 @@ class UserController
       if updated_user
         { success: true, message: 'Datos actualizados con éxito' }.to_json
       else
-        respuesta_error(500, 'Error al actualizar los datos')
+        { success: false, message: 'Error al actualizar los datos' }.to_json
       end
     else
-      respuesta_error(404, 'Usuario no encontrado')
+      { success: false, message: 'Usuario no encontrado' }.to_json
     end
   end
 
@@ -42,7 +39,7 @@ class UserController
     if usuario
       { success: true, rol: usuario[:role_id] }.to_json
     else
-      respuesta_error(401, 'Token no válido')
+      { success: false, message: 'Token no valido' }.to_json
     end
   end
 
@@ -52,7 +49,7 @@ class UserController
       usuario = UserDAO.find_one(ciudadano[:usuario_id])
       { success: true, usuario: usuario }.to_json
     else
-      respuesta_error(404, 'Usuario no encontrado')
+      { success: false, message: 'Usuario no encontrado' }.to_json
     end
   end
 
@@ -62,7 +59,7 @@ class UserController
       encontrado = UserDAO.find_one(usuario[:id])
       { success: true, usuario: encontrado }.to_json
     else
-      respuesta_error(401, 'Token no válido')
+      { success: false, message: 'Token no valido' }.to_json
     end
   end
 
@@ -96,8 +93,7 @@ class UserController
       first_name: usuario[:first_name],
       last_name: usuario[:last_name],
       photo: usuario[:photo],
-      role: usuario[:role_id],
-      gender_id: usuario[:gender_id] 
+      role: usuario[:role_id]
     }
     JWT.encode(payload, SECRET_KEY, 'HS256')
   end

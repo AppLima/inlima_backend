@@ -19,12 +19,12 @@ end
 
 put '/actualizar_cuenta' do
   data = JSON.parse(request.body.read)
-  token = request.cookies['myToken']
-  user_controller.actualizar_cuenta(token, data['password'], data['photo'])
+  token = request.env['HTTP_AUTHORIZATION']
+  user_controller.actualizar_cuenta(token, data)
 end
 
 get '/obtener_rol' do
-  token = request.cookies['myToken']
+  token = request.env['HTTP_AUTHORIZATION']
   user_controller.obtener_rol(token)
 end
 
