@@ -13,18 +13,18 @@ POST http://localhost:4567/iniciar_sesion
 Content-Type: application/json
 
 {
-  "email": "renzotipula2703@gmail.com",
+  "email": "20201426@aloe.ulima.edu.pe",
   "password": "securepassword123"
 }
 
 ###########
 PUT http://localhost:4567/actualizar_cuenta
+Authorization: {{token}}
 Content-Type: application/json
-Cookie: myToken=<TU_TOKEN>
 
 {
-  "password": "dddd",
-  "photo": "nueva_imagen_url"
+  "password": "SSSS",
+  "photo": "nueva_imagen_urlss"
 }
 ################
 

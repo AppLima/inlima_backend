@@ -2,11 +2,12 @@
 
 ### Prueba para record_change en ChangeController
 POST http://127.0.0.1:4567/record_change
-Content-Type: application/json
 Authorization: {{token}}
+Content-Type: application/json
+
 
 {
-    "complaint_id": ,
-    "status_id": 
+    "complaint_id": 6,
+    "status_id": 2
 }
 #########

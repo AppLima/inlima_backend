@@ -3,10 +3,10 @@ POST http://localhost:4567/register
 Content-Type: application/json
 
 {
-    "email": "ssss@gmail.com",
+    "email": "20200333@aloe.ulima.edu.pe",
     "password": "securepassword123",
-    "first_name": "John",
-    "last_name": "Doe",
+    "first_name": "Cesar",
+    "last_name": "Putito",
     "gender": 1,
     "dni": "12345678",
     "phone_number": "987654321",
