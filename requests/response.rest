@@ -17,5 +17,5 @@ Authorization: {{token}}
 
 {
     "option": 0,
-    "survey_id": 2
+    "survey_id": 1
 }
