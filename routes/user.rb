@@ -18,7 +18,7 @@ delete '/cerrar_sesion' do
 end
 
 put '/actualizar_cuenta' do
-  data = JSON.parse(request.body.read)
+  data = JSON.parse(request.body.read, symbolize_names: true)
   token = request.env['HTTP_AUTHORIZATION']
   user_controller.actualizar_cuenta(token, data)
 end

@@ -23,7 +23,7 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "password": "12",
+  "password": "*Renzo??SEFSASAS222A",
   "photo": "nueva_imagen_urlss"
 }
 ################

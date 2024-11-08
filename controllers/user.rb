@@ -23,18 +23,12 @@ class UserController
   def actualizar_cuenta(token, data)
     usuario = verificar_token(token)
     if usuario
-      # Verificar si hay una nueva contraseña y si es válida
       if data[:password]
-        puts "Recibida contraseña: #{data[:password]}"  # Depuración
         unless valid_password?(data[:password])
-          puts "Contraseña inválida detectada: #{data[:password]}" # Depuración adicional
           return { success: false, message: 'La contraseña no cumple con los requisitos de seguridad' }.to_json
         end
-        puts "Contraseña válida: #{data[:password]}"  # Depuración adicional si pasa la validación
+        updated_user = UserDAO.update_perfil(usuario[:id], data)
       end
-  
-      # Si la contraseña es válida (o no hay una nueva), se continúa con la actualización
-      updated_user = UserDAO.update_perfil(usuario[:id], data)
       if updated_user
         { success: true, message: 'Datos actualizados con éxito' }.to_json
       else
@@ -57,16 +51,6 @@ class UserController
   
     # Asegurarse de que todas las condiciones se cumplan
     min_length && has_uppercase && has_lowercase && has_digit && has_special_char
-  end
-  
-
-  def obtener_rol(token)
-    usuario = verificar_token(token)
-    if usuario
-      { success: true, rol: usuario[:role_id] }.to_json
-    else
-      { success: false, message: 'Token no valido' }.to_json
-    end
   end
 
   def encontrar_usuario(id_ciudadano)
