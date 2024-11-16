@@ -29,7 +29,7 @@ class CitizenController
 
       existing_citizen = CitizenDAO.find_one_by_dni(data[:dni])
       if existing_citizen
-        return { success: false, message: "El DNI ya está registrado" }.to_json
+        return { success: false, message: "El DNI ya esta registrado" }.to_json
       end
 
       usuario = UserDAO.create({
@@ -53,7 +53,7 @@ class CitizenController
 
           if aux
             Notifier.notify_welcome(usuario[:email], usuario[:first_name])
-            { success: true, message: "Usuario creado con éxito" }.to_json
+            { success: true, message: "Usuario creado con exito" }.to_json
           else
             UserDAO.remove(usuario[:id])
             { success: false, message: "Error al crear usuario" }.to_json
