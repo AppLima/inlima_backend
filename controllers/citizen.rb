@@ -7,15 +7,15 @@ class CitizenController
   def register(data)
     begin
       unless valid_email?(data[:email])
-        return { success: false, message: "Correo electrónico no válido" }.to_json
+        return { success: false, message: "Correo electronico no valido" }.to_json
       end
 
       unless valid_password?(data[:password])
-        return { success: false, message: "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial" }.to_json
+        return { success: false, message: "La contrasena debe tener al menos 8 caracteres, una letra mayuscula, una letra minuscula, un numero y un caracter especial" }.to_json
       end
 
       unless valid_phone_number?(data[:phone_number])
-        return { success: false, message: "Número de teléfono no compatible" }.to_json
+        return { success: false, message: "Numero de telefono no compatible" }.to_json
       end
 
       unless valid_dni?(data[:dni])
