@@ -20,8 +20,8 @@ module UserDAO
     $user_repository.find_all(email: email).first
   end
 
-  def self.update(data)
-    $user_repository.update(data[:id], data)
+  def self.update(id, data)
+    $user_repository.update(id, data)
   end
 
   def self.remove(id)

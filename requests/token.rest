@@ -3,7 +3,7 @@ POST http://localhost:4567/token/create
 Content-Type: application/json
 
 {
-    "email": "usuario@example.com"
+    "email": "valentinatp@inlima.com"
 }
 
 ### Prueba para verificar un token de verificación válido

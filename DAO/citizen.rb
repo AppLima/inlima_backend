@@ -30,8 +30,8 @@ module CitizenDAO
     Citizen.where(user_id: usuario_id).first
   end
 
-  def self.update(data)
-    $citizen_repository.update(data[:id], data)
+  def self.update(id, data)
+    $citizen_repository.update(id, data)
   end
 
   def self.find_one_by_dni(dni)

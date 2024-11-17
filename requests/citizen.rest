@@ -12,3 +12,23 @@ Content-Type: application/json
     "phone_number": "987654321",
     "district": 3
 }
+
+### Prueba de ver ciudadano y usuario
+GET http://localhost:4567/citizen/user/8
+Content-Type: application/json
+
+### Prueba para actualizar ciudadano-usuario
+PUT http://localhost:4567/citizen/update
+Content-Type: application/json
+
+{
+  "user_id": 46,
+  "email": "ignsaciobr@inlima.com",
+  "password": "password123A_",
+  "first_name": "Ignacio",
+  "last_name": "Barreto Ruiz",
+  "gender_id": 1,
+  "dni": "77778210",
+  "phone_number": "989350343",
+  "district": 3
+}
