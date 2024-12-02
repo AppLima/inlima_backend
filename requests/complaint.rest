@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzMzMzIzOTksImlkIjo3OSwiZW1haWwiOiJyZW56b3RpcHVsYTI3MDNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IkpvaG4iLCJsYXN0X25hbWUiOiJEb2UiLCJwaG90byI6IiIsInJvbGUiOjJ9.zhDs4m42n75eLvanjjtFgNP1WrBcinVhkt4aik5-a_w
+@token = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzU3NTg2MTgsImlkIjo3OSwiZW1haWwiOiJyZW56b3RpcHVsYTI3MDNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IkpvaG4iLCJsYXN0X25hbWUiOiJEb2UiLCJwaG90byI6Im51ZXZhX2ltYWdlbl91cmxzcyIsInJvbGUiOjJ9.UsTDS78Vi2BWmcsP9RO4PCRMINQ8eb1VN6h1fl-TIg0
 @tokenadmin = eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzM2NDQwOTIsImlkIjoxLCJlbWFpbCI6ImFkbWluQGlubGltYS5jb20iLCJmaXJzdF9uYW1lIjoiQWRtaW4iLCJsYXN0X25hbWUiOiJGb3JhbGwiLCJwaG90byI6IiIsInJvbGUiOjF9.WN5TbA1zeDisiMX3Q2SJan-F7Ab4Q6C_UJ-m3aFqzmY
 
 
@@ -44,3 +44,12 @@ Content-Type: application/json
 GET http://127.0.0.1:4567/user/complaints
 Content-Type: application/json
 Authorization: {{token}}
+
+#####
+POST http://127.0.0.1:4567/complaints/getfullcomplaint
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "complaint_id": 1 
+}

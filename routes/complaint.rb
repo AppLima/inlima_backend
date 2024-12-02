@@ -34,6 +34,19 @@ post '/complaints/filtered' do
   end
 end
 
+post '/complaints/getfullcomplaint' do
+  begin
+    token = request.env['HTTP_AUTHORIZATION']
+    if token.nil? || token.empty?
+      return { success: false, message: 'Token no proporcionado' }.to_json
+    end
+    data = JSON.parse(request.body.read, symbolize_names: true)
+    complaint_controller.getfullcomplaint(token, data)
+  rescue JSON::ParserError
+    { success: false, message: 'Error en el formato de la solicitud' }.to_json
+  end
+end
+
 get '/complaint/:id/details' do
   content_type :json
   complaint_controller.obtener_queja_con_detalles(params[:id].to_i)

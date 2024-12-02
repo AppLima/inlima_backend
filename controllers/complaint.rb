@@ -5,6 +5,9 @@ require_relative '../DAO/citizen'
 require_relative '../DAO/district'
 require_relative '../DAO/photos'
 require_relative '../DAO/administrator'
+require_relative '../DAO/administrator'
+require_relative '../DAO/photo'
+require_relative '../DAO/subject'
 
 class ComplaintController
   include AuthHelper
@@ -101,4 +104,26 @@ class ComplaintController
       { success: false, message: "Quejas no encontradas" }.to_json
     end
   end
+
+  def getfullcomplaint(token, data)
+    usuario = verificar_token(token)
+    auxiliar = CitizenDAO.find_one_by_user_id(usuario[:id]) || AdministratorDAO.find_one_by_user_id(usuario[:id])
+  
+    if auxiliar
+      queja = ComplaintDAO.find_one_by_complaint_id(data[:complaint_id])
+  
+      if queja
+  
+        photos = PhotoDAO.find_all_by_complaint_id(data[:complaint_id])
+        queja[:photos] = photos
+  
+        { success: true, data: queja }.to_json
+      else
+        { success: false, message: "Queja no encontrada" }.to_json
+      end
+    else
+      { success: false, message: "Usuario no autorizado o no encontrado como ciudadano o administrador" }.to_json
+    end
+  end  
+  
 end

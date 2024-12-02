@@ -6,8 +6,8 @@ POST http://localhost:4567/iniciar_sesion
 Content-Type: application/json
 
 {
-  "email": "gabrieltg@inlima.com",
-  "password": "password"
+  "email": "renzotipula2703@gmail.com",
+  "password": "Asds_12434"
 }
 
 ###########
