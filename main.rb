@@ -43,7 +43,7 @@ helpers do
     halt 401, { success: false, message: 'Token no encontrado o inválido' }.to_json unless token
     
     begin
-      JWT.decode(token, 'secret', true, algorithm: 'HS256').first
+      JWT.decode(token, ENV['SECRET_KEY'], true, algorithm: 'HS256').first
     rescue JWT::DecodeError
       halt 401, { success: false, message: 'Token no válido' }.to_json
     end

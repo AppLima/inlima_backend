@@ -95,7 +95,9 @@ class ComplaintController
 
   def obtener_quejas_usuario(token)
     usuario = verificar_token(token)
+    puts usuario
     ciudadano = CitizenDAO.find_one_by_user_id(usuario[:id])
+    puts ciudadano
 
     if ciudadano
       quejas = ComplaintDAO.find_all_by_citizen_id(ciudadano[:id])
