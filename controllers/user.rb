@@ -119,7 +119,8 @@ class UserController
       first_name: usuario[:first_name],
       last_name: usuario[:last_name],
       photo: usuario[:photo],
-      role: usuario[:role_id]
+      role: usuario[:role_id],
+      gender: usuario[:gender_id]
     }
     JWT.encode(payload, SECRET_KEY, 'HS256')
   end
