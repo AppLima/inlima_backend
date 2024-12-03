@@ -58,20 +58,40 @@ module ComplaintDAO
 
   def self.find_filtered(subject_ids, district_ids)
     query = Complaint
+  
+    # Filtrar por subject_ids si se proporciona
     if subject_ids.is_a?(Array) && !subject_ids.empty?
       query = query.where(subject_id: subject_ids)
     end
+  
+    # Filtrar por district_ids si se proporciona
     if district_ids.is_a?(Array) && !district_ids.empty?
       query = query.where(district_id: district_ids)
     end
-    resultados = query.eager(:status, { citizen: :user }, :district).all
   
-    #puts "Resultados encontrados: #{resultados.inspect}"
-    resultados
+    # Cargar datos con eager
+    resultados = query.eager(:status, :subject, { citizen: :user }, :district).all
+  
+    # Transformar los resultados
+    resultados.map do |complaint|
+      {
+        id: complaint.id,
+        description: complaint.description,
+        location_description: complaint.location_description,
+        latitude: complaint.latitude,
+        longitude: complaint.longitude,
+        dateofcreation: complaint.dateofcreation,
+        citizen_id: complaint.citizen_id, # Mantener el ID del ciudadano
+        subject_name: complaint.subject&.name, # Reemplazar subject_id por subject_name
+        status_name: complaint.status&.name,   # Reemplazar status_id por status_name
+        district_name: complaint.district&.name # Reemplazar district_id por district_name
+      }
+    end
   rescue Sequel::Error => e
     puts "Error al buscar quejas: #{e.message}"
-    nil
+    []
   end
+  
 
   def self.find_one_by_ciudadano_id(id)
     Complaint.where(id: id).eager(:status, citizen: [:user], district: [:name]).first
