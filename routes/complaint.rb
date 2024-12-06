@@ -57,3 +57,22 @@ get '/user/complaints' do
   token = request.env['HTTP_AUTHORIZATION']
   complaint_controller.obtener_quejas_usuario(token)
 end
+
+put '/complaint/:id/status' do
+  content_type :json
+  begin
+    token = request.env['HTTP_AUTHORIZATION']
+    if token.nil? || token.empty?
+      return { success: false, message: 'Token no proporcionado' }.to_json
+    end
+
+    # Parsear el cuerpo de la solicitud para obtener el nuevo estado
+    data = JSON.parse(request.body.read, symbolize_names: true)
+    data[:complaint_id] = params[:id].to_i # Agregar el ID de la queja desde la URL
+
+    # Llamar al controlador para actualizar el estado
+    complaint_controller.actualizar_estado_queja(token, data)
+  rescue JSON::ParserError
+    { success: false, message: 'Error en el formato de la solicitud' }.to_json
+  end
+end

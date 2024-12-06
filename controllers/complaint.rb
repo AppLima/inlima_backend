@@ -126,6 +126,35 @@ class ComplaintController
     else
       { success: false, message: "Usuario no autorizado o no encontrado como ciudadano o administrador" }.to_json
     end
-  end  
+  end 
+
+  def actualizar_estado_queja(token, data)
+    # Verificar el token
+    usuario = verificar_token(token)
+    return { success: false, message: 'Token inválido' }.to_json unless usuario
+  
+    # Verificar que el usuario es administrador
+    admin = AdministratorDAO.find_one_by_user_id(usuario[:id])
+    return { success: false, message: 'Acceso denegado: solo administradores pueden actualizar el estado' }.to_json unless admin
+  
+    # Validar la queja
+    queja = ComplaintDAO.find_one(data[:complaint_id])
+    return { success: false, message: 'Queja no encontrada' }.to_json unless queja
+  
+    # Validar el nuevo estado
+    nuevo_estado = data[:new_status]
+    estados_validos = [1, 2, 3] # Ejemplo: IDs válidos de estados
+    unless estados_validos.include?(nuevo_estado)
+      return { success: false, message: 'Estado no válido' }.to_json
+    end
+  
+    # Actualizar el estado
+    if ComplaintDAO.update_estado(data[:complaint_id], nuevo_estado)
+      { success: true, message: 'Estado actualizado correctamente' }.to_json
+    else
+      { success: false, message: 'Error al actualizar el estado' }.to_json
+    end
+  end
+  
   
 end
